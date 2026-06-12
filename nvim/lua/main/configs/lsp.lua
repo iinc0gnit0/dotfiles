@@ -61,7 +61,10 @@ cmp.setup({
 })
 
 -- LSP capabilities for autocompletion
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+--local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = vim.lsp.protocol.make_client_capabilities() -- Get The capabilities
+capabilities.general.positionEncodings = { "utf-16" } -- Set the offset encoding, see `:h vim.lsp.start` for more info
+vim.lsp.config('server', { capabilities = capabilities }) -- Setup the server
 
 -- LSP keybindings
 local on_attach = function(client, bufnr)
